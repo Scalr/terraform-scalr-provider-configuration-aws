@@ -9,7 +9,7 @@ data "scalr_environment" "available" {
 }
 
 locals {
-  all_environments = var.scalr_environments == ["*"]
+  all_environments = toset(var.scalr_environments) == toset(["*"])
   environments = local.all_environments ? var.scalr_environments : data.scalr_environment.available.*.id
 }
 
